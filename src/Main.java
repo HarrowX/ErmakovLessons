@@ -1,23 +1,18 @@
-import homeworks.Problem1;
+import my.utils.DynamicArray;
+import my.utils.Parser;
 
 public class Main {
     public static void main(String[] args) {
-        int[] array = {1, 2, 3, 4, 5}, extendedArray;
-        extendedArray = Problem1.addNumber2End(array, 6);
-        printArray(extendedArray);
-        Problem1.replaceNumber(array, 1, -2);
-        printArray(array);
-    }
 
+        int[] array = Parser.getArrayFromArgs(args);
 
-    public static void printArray(int[] array) {
-        if (array.length == 0) return;
-        StringBuilder out = new StringBuilder("{");
-        out.append(array[0]);
-        for (int i = 1; i < array.length; i++) {
-            out.append(", ").append(array[i]);
-        }
-        out.append("}");
-        System.out.println(out);
+        DynamicArray array1 = new DynamicArray(array);
+        DynamicArray array2 = new DynamicArray(array);
+
+        array1.append(6);
+        System.out.println(array1.array2String());
+        array2.insert(-2, 1);
+        System.out.println(array2.array2String());
+
     }
 }
