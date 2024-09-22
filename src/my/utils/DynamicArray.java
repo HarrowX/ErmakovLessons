@@ -1,9 +1,14 @@
 package my.utils;
 
 public class DynamicArray {
-    public int[] array = new int[256];
+    public int[] array = new int[32];
     public int length;
-    private static final int sizeExtend = 256;
+    private static final int sizeExtend = 32;
+
+    public int at(int index) {
+        if (index < 0) index = length + index;
+        return array[index];
+    }
 
     public DynamicArray(int[] array) {
         extendArray(array.length);
@@ -13,26 +18,33 @@ public class DynamicArray {
     private void extendArray(int length) {
         this.length = length;
         if (length <= array.length) return;
-        int countExtend = (length / sizeExtend + 1) * sizeExtend;
+        System.out.println("log: " + array.toString() + " start to extend");
+        int countExtend = length / sizeExtend + 1;
         int[] copyArray = new int[array.length];
         System.arraycopy(array, 0, copyArray, 0, array.length);
         array = new int[countExtend * sizeExtend];
         System.arraycopy(copyArray, 0, array, 0, copyArray.length);
+        System.out.println("log: " + array.toString() + " was been extended");
     }
 
-    public void append(int number) {
-        insert(number, length);
+    public DynamicArray append(int number) {
+        return insert(number, length);
     }
 
-    public void insert(int number, int destPos) {
-        if (array.length < length + 1) extendArray(length + 1);
-        length++;
+    public DynamicArray shift(int number) {
+        return insert(number, 0);
+    }
+
+    public DynamicArray insert(int number, int destPos) {
+        extendArray(length + 1);
         for (int i = length - 1; i > destPos; i--) {
-            array[i] = array[i-1];
+            array[i] = array[i - 1];
         }
         array[destPos] = number;
+        return this;
     }
-    public String array2String() {
+
+    public String stringify() {
         if (length == 0) return "{}";
         StringBuilder out = new StringBuilder("{");
         out.append(array[0]);
