@@ -19,10 +19,10 @@ public class DynamicArray {
         this.length = length;
         if (length <= array.length) return;
         System.out.println("log: " + array.toString() + " start to extend");
-        int countExtend = length / sizeExtend + 1;
+        int countExtend = length / SIZE_EXTEND + 1;
         int[] copyArray = new int[array.length];
         System.arraycopy(array, 0, copyArray, 0, array.length);
-        array = new int[countExtend * sizeExtend];
+        array = new int[countExtend * SIZE_EXTEND];
         System.arraycopy(copyArray, 0, array, 0, copyArray.length);
         System.out.println("log: " + array.toString() + " was been extended");
     }
