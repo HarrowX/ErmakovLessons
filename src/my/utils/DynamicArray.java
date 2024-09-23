@@ -18,31 +18,43 @@ public class DynamicArray {
     private void extendArray(int length) {
         this.length = length;
         if (length <= array.length) return;
-        System.out.println("log: " + array.toString() + " start to extend");
         int countExtend = length / SIZE_EXTEND + 1;
         int[] copyArray = new int[array.length];
         System.arraycopy(array, 0, copyArray, 0, array.length);
         array = new int[countExtend * SIZE_EXTEND];
         System.arraycopy(copyArray, 0, array, 0, copyArray.length);
-        System.out.println("log: " + array.toString() + " was been extended");
     }
 
-    public DynamicArray append(int number) {
+    public DynamicArray append(int number) throws Exception {
         return insert(number, length);
     }
 
-    public DynamicArray shift(int number) {
+    public DynamicArray unshift(int number) throws Exception {
         return insert(number, 0);
     }
 
-    public DynamicArray insert(int number, int destPos) {
-        extendArray(length + 1);
-        for (int i = length - 1; i > destPos; i--) {
-            array[i] = array[i - 1];
+    public DynamicArray insert(int number, int destPos) throws Exception {
+        return insertValuesFromArray(new int[]{number}, destPos);
+    }
+
+    public DynamicArray insertValuesFromArray(int[] array, int destPos) throws Exception {
+        if (destPos > this.array.length) {
+            throw new Exception("insert cant be doing out array.");
         }
-        array[destPos] = number;
+        shift(destPos, array.length);
+        for (int i = destPos, j = 0; j < array.length; i++, j++) {
+            this.array[i] = array[j];
+        }
         return this;
     }
+
+    private void shift(int srcPos, int count) {
+        extendArray(length + count);
+        for (int i = length - 1; i - count >= srcPos ; i--) {
+            array[i] = array[i - count];
+        }
+    }
+
 
     public String stringify() {
         if (length == 0) return "{}";
