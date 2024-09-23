@@ -3,7 +3,7 @@ package my.utils;
 public class DynamicArray {
     public int[] array = new int[32];
     public int length;
-    private static final int sizeExtend = 32;
+    private static final int SIZE_EXTEND = 32;
 
     public int at(int index) {
         if (index < 0) index = length + index;
