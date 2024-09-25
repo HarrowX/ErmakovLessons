@@ -1,7 +1,7 @@
 package my.utils;
 
 public class DynamicArray {
-    public int[] array = new int[32];
+    public int[] array = new int[SIZE_EXTEND];
     public int length;
     private static final int SIZE_EXTEND = 32;
 
@@ -55,8 +55,8 @@ public class DynamicArray {
         }
     }
 
-
-    public String stringify() {
+    @Override
+    public String toString() {
         if (length == 0) return "{}";
         StringBuilder out = new StringBuilder("{");
         out.append(array[0]);
