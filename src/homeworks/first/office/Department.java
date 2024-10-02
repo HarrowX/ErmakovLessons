@@ -16,6 +16,10 @@ public class Department {
         this.boss = boss;
     }
 
+    public void addEmployee(Employee employee) {
+        employee.setDepartment(this);
+    }
+
     @Override
     public String toString() {
         return name;

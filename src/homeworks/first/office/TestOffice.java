@@ -19,3 +19,4 @@ public class TestOffice {
         System.out.println(person1.getColleagues());
     }
 }
+

@@ -9,9 +9,8 @@ public class Line {
         this.end = end;
     }
 
-    public Line(int x1, int x2, int y1, int y2) {
-        begin = new Point(x1, y1);
-        end = new Point(x2, y2);
+    public Line(int x1, int y1, int x2, int y2) {
+        this(new Point(x1, y1),new Point(x2, y2));
     }
 
     @Override
@@ -49,5 +48,10 @@ class TestLine {
         System.out.println(line1);
         System.out.println(line2);
         System.out.println(line3);
+
+        System.out.println();
+
+        Line line4 = new Line(1, 2, 3,4);
+        System.out.println(line4);
     }
 }

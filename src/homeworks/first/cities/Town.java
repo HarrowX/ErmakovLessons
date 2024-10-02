@@ -19,7 +19,7 @@ public class Town {
         if (!road.isTwoSides) return this;
 
         if (!road.targetTown.roads.contains(road)) // TODO - сделать норм проверку
-            road.targetTown.roads.add(new Road(this, road.cost));
+            road.targetTown.roads.add(new Road(this, road.cost, true));
 
         return this;
     }

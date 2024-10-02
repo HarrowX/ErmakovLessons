@@ -4,11 +4,10 @@ public class Road {
     Town targetTown;
     int cost;
 
-    boolean isTwoSides = false;
+    boolean isTwoSides;
 
     public Road(Town targetTown, int cost) {
-        this.targetTown = targetTown;
-        this.cost = cost;
+        this(targetTown, cost, false);
     }
 
     public Road(Town targetTown, int cost, boolean isTwoSides) {
