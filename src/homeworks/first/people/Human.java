@@ -1,4 +1,4 @@
-package homeworks.first;
+package homeworks.first.people;
 
 public class Human {
     public Name name;
@@ -13,7 +13,9 @@ public class Human {
 
     public void setFather(Human father) {
         this.father = father;
+        correctDataRelationship();
     }
+
 
     public void correctDataRelationship() {
         if (father != null) {
@@ -25,7 +27,6 @@ public class Human {
     @Override
     public String toString() {
         String out = "Человек с именем ";
-        correctDataRelationship();
         if (name != null) out += name;
         else out += "Анонимус";
         out += " и ростом " + height;

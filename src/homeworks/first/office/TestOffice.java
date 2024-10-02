@@ -1,5 +1,7 @@
 package homeworks.first.office;
 
+
+
 public class TestOffice {
     public static void main(String[] args) {
         Department department = new Department("IT отдел");
@@ -13,5 +15,7 @@ public class TestOffice {
         System.out.println(person1);
         System.out.println(person2);
         System.out.println(person3);
+
+        System.out.println(person1.getColleagues());
     }
 }

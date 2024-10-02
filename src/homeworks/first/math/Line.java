@@ -1,4 +1,4 @@
-package homeworks.first;
+package homeworks.first.math;
 
 public class Line {
     public Point begin;

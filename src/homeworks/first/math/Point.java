@@ -1,4 +1,4 @@
-package homeworks.first;
+package homeworks.first.math;
 
 public class Point {
     public int x;

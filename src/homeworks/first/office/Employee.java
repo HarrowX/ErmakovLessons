@@ -1,12 +1,18 @@
 package homeworks.first.office;
 
+import java.util.List;
+
 public class Employee {
-    String name;
-    Department department;
+    public String name;
+    public Department department;
 
     public Employee(String name, Department department) {
         this.name = name;
         this.department = department;
+        department.employees.add(this);
+    }
+    public List<Employee> getColleagues() {
+        return department.getEmployees();
     }
 
     @Override

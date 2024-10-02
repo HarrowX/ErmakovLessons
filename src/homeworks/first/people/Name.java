@@ -1,4 +1,4 @@
-package homeworks.first;
+package homeworks.first.people;
 
 public class Name {
     public String name;
