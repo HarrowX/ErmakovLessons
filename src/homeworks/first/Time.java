@@ -10,8 +10,9 @@ public class Time {
     }
     private static final int SECONDS_IN_DAY, SECONDS_IN_HOUR, SECONDS_IN_MINUTES;
 
-    public Time(int seconds, int minuts, int hour) {
-        this.seconds = seconds + 60 * minuts + 3600 * hour;
+    public Time(int seconds, int minutes, int hour) {
+        this.seconds = seconds + SECONDS_IN_MINUTES * minutes + SECONDS_IN_HOUR * hour;
+        this.seconds = seconds + SECONDS_IN_MINUTES * minutes + SECONDS_IN_HOUR * hour;
     }
 
     public Time(int seconds) {
