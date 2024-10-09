@@ -33,7 +33,7 @@ public class Time {
         return seconds % SECONDS_IN_DAY - getHour();
     }
     public int howManySecondsLeftAfterMinutes() {
-        return (seconds % (60 * 60))  - (seconds % (60 * 60)) / (60) ;
+        return (seconds % SECONDS_IN_HOUR)  - (seconds % SECONDS_IN_HOUR) / SECONDS_IN_MINUTES ;
     }
 
     @Override
