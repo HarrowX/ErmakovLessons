@@ -5,6 +5,14 @@ public class Name {
     public String surname;
     public String patronymic;
 
+    public Name(String name) {
+        this(name, null, null);
+    }
+
+    public Name(String name, String surname) {
+        this(name, surname, null);
+    }
+
     public Name(String name, String surname, String patronymic) {
         this.name = name;
         this.surname = surname;
@@ -26,9 +34,7 @@ public class Name {
 class TestName {
 
     public static void main(String[] args) {
-        Name person1 = new Name("Клеопатра",
-                null,
-                null);
+        Name person1 = new Name("Клеопатра");
 
         Name person2 = new Name("Александр",
                 "Пушкин",
@@ -36,8 +42,7 @@ class TestName {
         );
 
         Name person3 = new Name("Владимир",
-                "Маяковский",
-                null);
+                "Маяковский");
 
         System.out.println(person1);
         System.out.println(person2);

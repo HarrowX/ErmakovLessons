@@ -1,37 +1,33 @@
 package homeworks.first.cities;
 
-import java.util.ArrayList;
-import java.util.List;
-
 
 public class Town {
-    public String name;
-    public List<Road> roads = new ArrayList<>();
+    private String name;
+    private Graph graph;
 
     public Town(String name) {
-        this.name = name;
+        this(name, null);
     }
 
-    public Town addRoad(Road road) {
+    public Town(String name, Graph graph) {
+        this.name = name;
+        this.graph = graph;
+    }
+    public void print() {
+        System.out.println(this);
+    }
 
-        if (!roads.contains(road)) roads.add(road);
+    public Graph getGraph() {
+        return graph;
+    }
 
-        if (!road.isTwoSides) return this;
-
-        if (!road.targetTown.roads.contains(road)) // TODO - сделать норм проверку
-            road.targetTown.roads.add(new Road(this, road.cost, true));
-
-        return this;
+    public void setGraph(Graph graph) {
+        this.graph = graph;
     }
 
     @Override
     public String toString() {
-        StringBuilder out = new StringBuilder("Town is ");
-        out.append(name).append(":\n");
-        for (Road road : roads) {
-            out.append(road).append("\n");
-        }
-        return out.toString();
+        return name ;
     }
 }
 

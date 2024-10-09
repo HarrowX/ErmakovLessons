@@ -6,9 +6,22 @@ public class Human {
 
     public Human father;
 
+    public Human(String name, int height) {
+        this(name, height, null);
+    }
+
+    public Human(String name, int height, Human father) {
+        this(new Name(name), height, father);
+    }
+
     public Human(Name name, int height) {
+        this(name, height, null);
+    }
+
+    public Human(Name name, int height, Human father) {
         this.name = name;
         this.height = height;
+        setFather(father);
     }
 
     public void setFather(Human father) {
@@ -18,79 +31,44 @@ public class Human {
 
 
     public void correctDataRelationship() {
-        if (father != null) {
-            if (name.surname == null && father.name.surname != null) name.surname = father.name.surname;
-            if (name.patronymic == null && father.name.name != null) name.patronymic = father.name.name + "ович";
-        }
+        if (father == null) return;
+        if (name.surname == null && father.name.surname != null) name.surname = father.name.surname;
+        if (name.patronymic == null && father.name.name != null) name.patronymic = father.name.name + "ович";
+
+    }
+
+    public String getName() {
+        if (name.name != null) return name.name;
+        return "";
+    }
+
+    public String getSurName() {
+        if (name.surname != null) return name.surname;
+        if (father != null) return father.getSurName();
+        return "";
+    }
+
+    public String getPatronymic() {
+        if (name.patronymic != null) return name.patronymic;
+        if (father != null) return father.getName();
+        return "";
     }
 
     @Override
     public String toString() {
-        String out = "Человек с именем ";
-        if (name != null) out += name;
-        else out += "Анонимус";
-        out += " и ростом " + height;
-        return out;
+        return (getName() + " " + getSurName() + " " + getPatronymic().trim()) + ", " + height;
     }
 }
 
 class TestHuman {
     public static void main(String[] args) {
-//        test1();
-        test2();
-    }
+        Human p1 = new Human("Лев", 170);
+        Human p2 = new Human(new Name("Сергей","Пушкин"), 168, p1);
+        Human p3 = new Human("Александр", 167, p2);
 
-    public static void test1() {
-        Name name1 = new Name("Клеопатра",
-                null,
-                null);
-
-        Name name2 = new Name("Александр",
-                "Сергеевич",
-                "Пушкин");
-
-        Name name3 = new Name("Владимир",
-                null,
-                "Маяковский");
-
-        Human person1 = new Human(name1, 152);
-        Human person2 = new Human(name2, 167);
-        Human person3 = new Human(name3, 189);
-
-        System.out.println(person1);
-        System.out.println(person2);
-        System.out.println(person3);
-    }
-
-    public static void test2() {
-        Name name1 = new Name("Иван",
-                "Чудов",
-                null);
-
-        Name name2 = new Name("Петр",
-                "Чудов",
-                null);
-
-        Name name3 = new Name("Борис",
-                null,
-                null);
-
-        Human person1 = new Human(name1, 152);
-        Human person2 = new Human(name2, 167);
-        Human person3 = new Human(name3, 189);
-
-        System.out.println(person1);
-        System.out.println(person2);
-        System.out.println(person3);
-
-        System.out.println();
-
-        person2.setFather(person1);
-        person3.setFather(person2);
-
-        System.out.println(person1);
-        System.out.println(person2);
-        System.out.println(person3);
+        System.out.println(p1);
+        System.out.println(p2);
+        System.out.println(p3);
     }
 }
 

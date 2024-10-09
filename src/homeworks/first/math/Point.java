@@ -12,7 +12,12 @@ public class Point {
     public Point() {
         this(0, 0);
     }
-
+    public Point sum(Point other) {
+        return new Point(other.x + x, other.y + y);
+    }
+    public Point sum(int x, int y) {
+        return new Point(this.x + x, this.y + y);
+    }
     @Override
     public String toString() {
         String out = "{";
@@ -26,9 +31,9 @@ public class Point {
 
 class TestPoint {
     public static void main(String[] args) {
-        Point A = new Point(1, 2),
-                B = new Point(2, 1),
-                C = new Point(0, 0);
+        Point A = new Point(3, 5),
+                B = new Point(25, 6),
+                C = new Point(7, 8);
         System.out.println(A);
         System.out.println(B);
         System.out.println(C);

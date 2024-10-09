@@ -10,8 +10,17 @@ public class Line {
     }
 
     public Line(int x1, int y1, int x2, int y2) {
-        this(new Point(x1, y1),new Point(x2, y2));
+        this(new Point(x1, y1), new Point(x2, y2));
     }
+
+    public int getLength() {
+        return (int) Math.sqrt((end.x - begin.x) * (end.x - begin.x) + (end.y - begin.y) * (end.y - begin.y));
+    }
+
+    public static int getLength(Point begin, Point end) {
+        return (int) Math.sqrt((end.x - begin.x) * (end.x - begin.x) + (end.y - begin.y) * (end.y - begin.y));
+    }
+
 
     @Override
     public String toString() {
@@ -27,14 +36,10 @@ public class Line {
 
 class TestLine {
     public static void main(String[] args) {
-        Point point1 = new Point(1, 3);
-        Point point2 = new Point(23, 8);
-        Point point3 = new Point(5, 10);
-        Point point4 = new Point(25, 10);
 
-        Line line1 = new Line(point1, point2);
-        Line line2 = new Line(point3, point4);
-        Line line3 = new Line(point1, point4);
+        Line line1 = new Line(1, 3, 23, 8);
+        Line line2 = new Line(5, 10, 25, 10);
+        Line line3 = new Line(line1.begin, line2.end);
 
         System.out.println(line1);
         System.out.println(line2);
@@ -42,8 +47,10 @@ class TestLine {
 
         System.out.println();
 
-        point2.x = 10; point2.y = 10;
-        point3.x = 20; point3.y = 20;
+        line1.begin.x = 10;
+        line1.begin.y = 10;
+        line2.end.x = 20;
+        line2.end.y = 20;
 
         System.out.println(line1);
         System.out.println(line2);
@@ -51,7 +58,5 @@ class TestLine {
 
         System.out.println();
 
-        Line line4 = new Line(1, 2, 3,4);
-        System.out.println(line4);
     }
 }
