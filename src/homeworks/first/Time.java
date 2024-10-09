@@ -3,6 +3,13 @@ package homeworks.first;
 public class Time {
     public int seconds;
 
+    static {
+        SECONDS_IN_DAY = 60 * 60 * 24;
+        SECONDS_IN_HOUR = 60 * 60;
+        SECONDS_IN_MINUTES = 60;
+    }
+    private static final int SECONDS_IN_DAY, SECONDS_IN_HOUR, SECONDS_IN_MINUTES;
+
     public Time(int seconds, int minuts, int hour) {
         this.seconds = seconds + 60 * minuts + 3600 * hour;
     }
@@ -12,11 +19,18 @@ public class Time {
     }
 
     public int getHour() {
-        return (seconds % (24 * 60 * 60)) / (60 * 60);
+        return (seconds % SECONDS_IN_DAY) / SECONDS_IN_HOUR;
+    }
+    public int getMinutes() {
+        return (seconds  % SECONDS_IN_HOUR) / SECONDS_IN_MINUTES;
+    }
+
+    public int getSeconds() {
+        return seconds % SECONDS_IN_MINUTES;
     }
 
     public int howManyMinutesLeftAfterHour() {
-        return seconds % (24 * 60 * 60) - getHour();
+        return seconds % SECONDS_IN_DAY - getHour();
     }
     public int howManySecondsLeftAfterMinutes() {
         return (seconds % (60 * 60))  - (seconds % (60 * 60)) / (60) ;
@@ -24,15 +38,7 @@ public class Time {
 
     @Override
     public String toString() {
-        String out = "";
-
-        out += (seconds % (24 * 60 * 60)) / (60 * 60);
-        out += ":";
-        out += (seconds % (60 * 60)) / (60);
-        out += ":";
-        out += seconds % 60;
-
-        return out;
+        return getHour()+":" + getMinutes()+ ":" +getSeconds();
     }
 }
 
