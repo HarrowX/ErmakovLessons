@@ -12,7 +12,6 @@ public class Time {
 
     public Time(int seconds, int minutes, int hour) {
         this.seconds = seconds + SECONDS_IN_MINUTES * minutes + SECONDS_IN_HOUR * hour;
-        this.seconds = seconds + SECONDS_IN_MINUTES * minutes + SECONDS_IN_HOUR * hour;
     }
 
     public Time(int seconds) {
