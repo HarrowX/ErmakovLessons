@@ -1,44 +1,51 @@
 package homeworks.first;
 
+import lombok.Getter;
+
 public class Time {
-    public int seconds;
+    @Getter
+    private int seconds;
 
     static {
         SECONDS_IN_DAY = 60 * 60 * 24;
         SECONDS_IN_HOUR = 60 * 60;
         SECONDS_IN_MINUTES = 60;
     }
+
     private static final int SECONDS_IN_DAY, SECONDS_IN_HOUR, SECONDS_IN_MINUTES;
 
     public Time(int seconds, int minutes, int hour) {
-        this.seconds = seconds + SECONDS_IN_MINUTES * minutes + SECONDS_IN_HOUR * hour;
+        this(seconds + SECONDS_IN_MINUTES * minutes + SECONDS_IN_HOUR * hour);
     }
 
     public Time(int seconds) {
-        this.seconds = seconds;
+        if (seconds <= 0) throw new IllegalArgumentException("seconds must be not negative");
+        this.seconds = seconds % SECONDS_IN_DAY;
     }
 
-    public int getHour() {
-        return (seconds % SECONDS_IN_DAY) / SECONDS_IN_HOUR;
-    }
-    public int getMinutes() {
-        return (seconds  % SECONDS_IN_HOUR) / SECONDS_IN_MINUTES;
+    public int hours() {
+        return seconds / SECONDS_IN_HOUR;
     }
 
-    public int getSeconds() {
+    public int minutes() {
+        return (seconds % SECONDS_IN_HOUR) / SECONDS_IN_MINUTES;
+    }
+
+    public int seconds() {
         return seconds % SECONDS_IN_MINUTES;
     }
 
     public int howManyMinutesLeftAfterHour() {
-        return seconds % SECONDS_IN_DAY - getHour();
+        return (seconds - SECONDS_IN_HOUR * hours()) / SECONDS_IN_MINUTES;
     }
+
     public int howManySecondsLeftAfterMinutes() {
-        return (seconds % SECONDS_IN_HOUR)  - (seconds % SECONDS_IN_HOUR) / SECONDS_IN_MINUTES ;
+        return seconds();
     }
 
     @Override
     public String toString() {
-        return getHour()+":" + getMinutes()+ ":" +getSeconds();
+        return hours() + ":" + minutes() + ":" + seconds();
     }
 }
 

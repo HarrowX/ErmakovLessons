@@ -1,10 +1,19 @@
 package homeworks.first.people;
 
-public class Human {
-    public Name name;
-    public int height;
+import lombok.Getter;
 
-    public Human father;
+public class Human {
+    private Name name;
+    @Getter
+    private int height;
+
+    public void setHeight(int height) {
+        if (height > 500 || height < 0) throw new IllegalArgumentException("height must be in range 1 to 499");
+        this.height = height;
+    }
+
+    @Getter
+    private Human father;
 
     public Human(String name, int height) {
         this(name, height, null);
@@ -24,7 +33,7 @@ public class Human {
         setFather(father);
     }
 
-    public void setFather(Human father) {
+    private void setFather(Human father) {
         this.father = father;
         correctDataRelationship();
     }
@@ -32,31 +41,34 @@ public class Human {
 
     public void correctDataRelationship() {
         if (father == null) return;
-        if (name.surname == null && father.name.surname != null) name.surname = father.name.surname;
-        if (name.patronymic == null && father.name.name != null) name.patronymic = father.name.name + "ович";
+        if (name.getSurname() == null && father.name.getSurname() != null) name.setSurname(father.name.getSurname());
+        if (name.getPatronymic() == null && father.name.getName() != null) name.setPatronymic(father.name.getName() + "ович");
 
     }
 
     public String getName() {
-        if (name.name != null) return name.name;
+        if (name.getName() != null) return name.getName();
         return "";
+    }
+    public Name getObjectName() {
+        return name;
     }
 
     public String getSurName() {
-        if (name.surname != null) return name.surname;
+        if (name.getSurname() != null) return name.getSurname();
         if (father != null) return father.getSurName();
         return "";
     }
 
     public String getPatronymic() {
-        if (name.patronymic != null) return name.patronymic;
+        if (name.getPatronymic() != null) return name.getPatronymic();
         if (father != null) return father.getName();
         return "";
     }
 
     @Override
     public String toString() {
-        return (getName() + " " + getSurName() + " " + getPatronymic().trim()) + ", " + height;
+        return (getName() + " " + getSurName() + " " + getPatronymic()).trim() + ", " + height;
     }
 }
 

@@ -1,21 +1,25 @@
 package homeworks.first.cities;
 
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class Graph {
-    List<Road> roads = new ArrayList<>();
-    List<Road> roadsTo;
+
+    @Getter
+    private List<Road> roads = new ArrayList<>();
+    private List<Road> roadsTo;
+    @Getter
     private Town currentTown;
+
 
     public void setCurrentTown(Town currentTown) {
         this.currentTown = currentTown;
         initRoadsTo(currentTown);
     }
 
-    public Town getCurrentTown() {
-        return currentTown;
-    }
     public Graph print() {
         System.out.println(this);
         return this;
@@ -27,7 +31,7 @@ public class Graph {
     }
 
     private void checkAndAddRoadTo(Road road, Town town) {
-        if (road.from == town) roadsTo.add(road);
+        if (road.getFrom().canEqual(town)) roadsTo.add(road);
     }
     private void initRoadsTo(Town town) {
         roadsTo = new ArrayList<>();
@@ -42,9 +46,12 @@ public class Graph {
         return this;
     }
     public Graph addRoad(Town from, Town to, int cost) {
-        return addRoad(new Road(from, to, cost));
+        if (!roads.contains(new Road(from, to, cost)))
+            return addRoad(new Road(from, to, cost));
+        throw new IllegalArgumentException("Road must be only one");
     }
     public Graph addRoad(Town from, Town to, int cost, boolean isTwoSides) {
+
         if (isTwoSides) return addRoadTwice(from, to, cost);
         return addRoad(from, to, cost);
     }
@@ -61,10 +68,10 @@ public class Graph {
         }
         return out.toString();
     }
-
-    static class Road {
-        Town from, to;
-        int cost;
+    @Getter @EqualsAndHashCode
+    public static class Road {
+        private Town from, to;
+        private int cost;
 
         public Road(Town from, Town to, int cost) {
             this.from = from;

@@ -1,7 +1,10 @@
 package homeworks.first;
 
+import lombok.Getter;
+
 public class Cat {
-    String name;
+    @Getter
+    private String name;
 
     public Cat(String name) {
         this.name = name;

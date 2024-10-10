@@ -7,9 +7,6 @@ import java.util.List;
 public class BrokenLine {
     public List<Point> points = new ArrayList<>();
 
-    public BrokenLine() {
-    }
-
     public BrokenLine(Point... points) {
         this(Arrays.stream(points).toList());
     }
@@ -29,7 +26,7 @@ public class BrokenLine {
     public int getLength() {
         int acc = 0;
         for (int i = 1; i < points.size(); i++) {
-            acc += Line.getLength(points.get(i), points.get(i-1));
+            acc += points.get(i).distanceTo(points.get(i-1));
         }
         return acc;
     }
@@ -55,7 +52,7 @@ class TestBrokenLine {
 
         BrokenLine line2 = new BrokenLine(points);
         System.out.println(line);
-        System.out.println(line2);
+        System.out.println(line.getLength());
 
     }
 }

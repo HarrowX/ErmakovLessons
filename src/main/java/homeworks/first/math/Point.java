@@ -1,12 +1,18 @@
 package homeworks.first.math;
 
+import lombok.Getter;
+import lombok.Setter;
+
 public class Point {
-    public int x;
-    public int y;
+    @Getter @Setter
+    private int x,y;
 
     public Point(int x, int y) {
         this.x = x;
         this.y = y;
+    }
+    public Point(Point point) {
+        this(point.x, point.y);
     }
 
     public Point() {
@@ -17,6 +23,13 @@ public class Point {
     }
     public Point sum(int x, int y) {
         return new Point(this.x + x, this.y + y);
+    }
+
+    public int distanceTo(int x, int y) {
+        return (int)Math.sqrt((this.x - x) * (this.x - x) + (this.y - y) * (this.y - y));
+    }
+    public int distanceTo(Point other) {
+        return distanceTo(other.x, other.y);
     }
     @Override
     public String toString() {

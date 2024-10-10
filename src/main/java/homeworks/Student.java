@@ -1,12 +1,17 @@
 package homeworks;
 
+import lombok.Getter;
+import lombok.NonNull;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class Student {
 
-    public String name;
-    public List<Integer> marks = new ArrayList<>();
+    @Getter @NonNull
+    private String name;
+    @Getter()
+    private final List<Integer> marks = new ArrayList<>();
 
     public Student(String name) {
         this(name,new int[0]);
@@ -23,16 +28,19 @@ public class Student {
         avg /= marks.size();
         return avg;
     }
-
-    public Student(String name, int... marks) {
-        this.name = name;
-        setMarks(marks);
+    public boolean isExcellent() {
+        return Math.round(getAvgMarks()) == 5;
     }
-
-    public void setMarks(int... marks) {
+    public Student(String name, int... marks){
+        if (name == null || name.isBlank()) throw new IllegalArgumentException("name must be not empty");
+        this.name = name;
         for (int mark : marks) {
-            this.marks.add(mark);
+            addMark(mark);
         }
+    }
+    public void addMark(int mark) {
+        if(mark < 2 || mark > 5) throw new IllegalArgumentException("Mark must be 2, 3, 4 or 5");
+        this.marks.add(mark);
     }
 
     @Override
@@ -43,7 +51,7 @@ public class Student {
 }
 
 class TestStudent {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
         Student student1 = new Student("Вася", 3, 4, 5);
         Student student2 = new Student("Максим");
 

@@ -1,9 +1,12 @@
 package homeworks.first.people;
 
+import lombok.Getter;
+import lombok.Setter;
+
 public class Name {
-    public String name;
-    public String surname;
-    public String patronymic;
+    @Getter @Setter
+    private String name, surname, patronymic;
+
 
     public Name(String name) {
         this(name, null, null);
@@ -14,6 +17,7 @@ public class Name {
     }
 
     public Name(String name, String surname, String patronymic) {
+        if (name == null && surname == null && patronymic == null) throw new IllegalArgumentException("name must be have more then 0 arg");
         this.name = name;
         this.surname = surname;
         this.patronymic = patronymic;

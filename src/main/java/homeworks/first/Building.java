@@ -1,17 +1,20 @@
 package homeworks.first;
 
+import lombok.Getter;
+
 public class Building {
-    public final int countFloor;
+    @Getter
+    private final int countFloor;
 
     public Building(int countFloor) {
+        if (countFloor <= 0) throw new IllegalArgumentException("count floors must be positive");
         this.countFloor = countFloor;
     }
 
     @Override
     public String toString() {
         if (countFloor > 1) return "Здание с " + countFloor + " этажами";
-        if (countFloor == 1) return "Здание с 1 этажом";
-        return "здание с невалидным количеством этажей";
+        return "Здание с 1 этажом";
     }
 }
 

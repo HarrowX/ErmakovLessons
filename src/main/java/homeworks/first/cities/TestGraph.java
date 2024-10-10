@@ -27,6 +27,6 @@ public class TestGraph {
                 .to(1).print()
                 .to(0).print();
 
-
+        System.out.println(A.getRoads());
     }
 }
